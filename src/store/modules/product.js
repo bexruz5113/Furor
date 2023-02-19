@@ -17,14 +17,16 @@ const mutations = {
   DELETE_PRODUCT(state, id) {
     state.product = state.product.filter((x) => x.id != id);
   },
-  ADD_PRODUCT(state) {
-  }
-  // UPDATE_STUFF(state, payload) {
-  //   state.staffs = state.staffs.map((x) => {
-  //     if (x.id == payload.id) return payload;
-  //     else return x;
-  //   });
-  // },
+  ADD_PRODUCT(state, data) {
+    console.log(data);
+    state.product.push(data);
+  },
+  UPDATE_PRODUCT(state, payload) {
+    state.product = state.product.map((x) => {
+        if (x.id == payload.id) return payload;
+         else return x;
+    });
+  },
 };
 const actions = {
   getProduct({ commit }) {
@@ -54,24 +56,25 @@ const actions = {
       .post("http://94.158.54.194:9092/api/product", data)
       .then(response => {
         console.log(response);
-          commit("ADD_PRODUCT");
+          commit("ADD_PRODUCT", response.data);
       })
       .catch(error => {
         console.log(error);
       });
   },
 
-  // updateProduct({commit}, payload) {
-  //   axios
-  //     .put(`http://localhost:3000/employees/${payload.id}`, payload)
-  //     .then((res) => {
-  //       commit("UPDATE_STAFF", res.data);
-  //       console.log(res);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // },
+  updateProduct({commit}, payload) {
+    console.log(payload.data);
+    axios
+      .put(`http://94.158.54.194:9092/api/product?id=${payload.id}`, payload.data)
+      .then((response) => {
+        console.log(response);
+        commit("UPDATE_PRODUCT", response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
 };
 
 export default {
