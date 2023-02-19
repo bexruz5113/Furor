@@ -1,15 +1,13 @@
 <template>
   <div>
-    <q-layout view="lHh Lpr lFf">
+    <q-layout>
       <q-header elevated>
-        <q-toolbar>
-
-
+        <q-toolbar class="q-px-md ">
           <q-toolbar-title>
             Furor Progress
           </q-toolbar-title>
-
-          <q-btn flat dense round icon="menu" aria-label="Menu" @click="leftDrawerOpen = !leftDrawerOpen" />
+          <q-btn flat dense round icon="search" class="q-mr-md" aria-label="Menu"/>
+          <q-btn flat dense round icon="menu" aria-label="Menu"/>
         </q-toolbar>
       </q-header>
       <q-page-container>
@@ -20,9 +18,6 @@
 </template>
 
 <script>
-
-
-
 export default {
   name: 'MainLayout',
   components: {

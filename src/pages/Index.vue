@@ -1,43 +1,38 @@
 <template>
   <div class="q-pa-md">
-    <div style="overflow-x:auto;">
-      <div class="row justify-end">
-        <q-pagination
-      v-model="current"
-      :max="5"
-      direction-links
-    />
-        <q-btn @click="addDialog = true" class="q-px-lg q-mb-xs" color="primary" label="+Add" />
-
+    <div>
+      <div class="flex justify-end">
+        <q-btn @click="addDialog = true" class="q-px-lg q-mb-xs" color="blue-6">
+          <q-icon name="add" size="1.7em" /> Add
+        </q-btn>
       </div>
-      <table class="table">
-        <thead>
+      <q-markup-table>
+        <thead class="bg-blue-6">
           <tr>
-            <th scope="col">N_</th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Cost</th>
-            <th scope="col">Address</th>
-            <th scope="col">Product Type Id</th>
-            <th scope="col">Created Date</th>
-            <th scope="col">Edit/Delete</th>
+            <th>N_</th>
+            <th>Product Name</th>
+            <th>Cost</th>
+            <th>Address</th>
+            <th>Product Type Id</th>
+            <th>Created Date</th>
+            <th>Edit/Delete</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="stuff,index in product" :key="stuff.id">
-            <th scope="row">{{index+1}}</th>
+          <tr v-for="stuff, index in product" :key="stuff.id">
+            <td class="q-px-md">{{ index + 1 }}. </td>
             <td>{{ stuff.name_uz }}</td>
             <td>{{ stuff.cost }}</td>
             <td>{{ stuff.address }}</td>
             <td>{{ stuff.product_type_id }}</td>
             <td>{{ stuff.created_date }}</td>
             <td>
-              <q-btn flat round color="primary" icon="edit" @click="editProduct(stuff.id, true)" />
+              <q-btn flat round color="blue-6" icon="edit" @click="editProduct(stuff.id, true)" />
               <q-btn flat round color="red" icon="delete_outline" @click="deleting(stuff.id)" />
-
             </td>
           </tr>
         </tbody>
-      </table>
+      </q-markup-table>
     </div>
     <div>
       <q-dialog v-model="editShow">
@@ -90,7 +85,6 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
   data() {
     return {
-      deleted: false,
       addDialog: false,
       editShow: false,
       editForm: {},
@@ -115,7 +109,7 @@ export default {
     },
     createProduct() {
       this.form["created_date"] = new Date();
-      if(this.form){
+      if (this.form) {
         this.addProduct(this.form);
       }
       window.location.reload();
@@ -142,30 +136,11 @@ export default {
 </script>
 
 <style lang="css" scoped>
-table {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-table td,
-table th {
-  padding: 8px;
-}
-
-table tr:nth-child(even) {
-  background-color: #f2f2f2;
-}
-
-table tr:hover {
-  background-color: #ddd;
-}
-
 table th {
   padding-top: 12px;
   padding-bottom: 12px;
+  font-size: 14px;
   text-align: left;
-  background-color: #1976D2;
   color: white;
 }
 </style>

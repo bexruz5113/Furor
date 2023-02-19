@@ -18,7 +18,6 @@ const mutations = {
     state.product = state.product.filter((x) => x.id != id);
   },
   ADD_PRODUCT(state, data) {
-    console.log(data);
     state.product.push(data);
   },
   UPDATE_PRODUCT(state, payload) {
@@ -55,7 +54,6 @@ const actions = {
     axios
       .post("http://94.158.54.194:9092/api/product", data)
       .then(response => {
-        console.log(response);
           commit("ADD_PRODUCT", response.data);
       })
       .catch(error => {
@@ -64,11 +62,9 @@ const actions = {
   },
 
   updateProduct({commit}, payload) {
-    console.log(payload.data);
     axios
       .put(`http://94.158.54.194:9092/api/product?id=${payload.id}`, payload.data)
       .then((response) => {
-        console.log(response);
         commit("UPDATE_PRODUCT", response.data);
       })
       .catch((error) => {
